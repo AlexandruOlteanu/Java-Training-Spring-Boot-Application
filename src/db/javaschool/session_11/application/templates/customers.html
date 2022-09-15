@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Hello from Thymeleaf!</h1>
+<form th:object="${searchObj}"
+      th:action="@{/web/customers/search}"
+      method="post">
+    <div>
+        <input id="search" type="text"
+               th:field="*{query}">
+    </div>
+
+    <button type="submit">Search</button>
+</form>
+<h1 th:text="${message}"></h1>
+<div th:switch="${customers}">
+    <h2 th:case="null">No customers yet!</h2>
+    <div th:case="*">
+        <h2>Students</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="customer : ${customers}">
+                <td th:text="${customer.username}"></td>
+                <td th:text="${customer.firstName}"></td>
+                <td th:text="${customer.lastName}"></td>
+                <td th:text="${customer.city}"></td>
+                <td th:text="${customer.country}"></td>
+                <td><a th:href="@{/web/customers/edit/{id}(id=${customer.id})}">Edit</a></td>
+                <td><a th:href="@{/web/customers/delete/{id}(id=${customer.id})}">Delete</a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <p><a href="/web/customers/add/">Add a new customer</a></p>
+</div>
+</body>
+</html>

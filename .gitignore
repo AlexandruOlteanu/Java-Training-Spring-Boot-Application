@@ -1,0 +1,7 @@
+out/
+src/db/javaschool/answers/
+target/
+.idea/libraries/
+credentials.txt
+example.log*
+application.properties
